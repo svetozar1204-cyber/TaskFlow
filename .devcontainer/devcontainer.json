@@ -1,0 +1,23 @@
+
+{
+    "name": "TaskFlow Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "privileged": true,
+    "init": true,
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:4": {
+            "moby": true,
+            "dockerDashComposeVersion": "v2"
+        }
+    },
+    "forwardPorts": [5000],
+    "portsAttributes": {
+        "5000": {
+            "label": "TaskFlow",
+            "onAutoForward": "openBrowser"
+        }
+    },
+    "postCreateCommand": "pip install -r requirements.txt"
+}

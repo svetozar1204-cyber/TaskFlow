@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+{% block title %}Редактиране на проект | TaskFlow{% endblock %}
+{% block page_title %}Редактиране на проект{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Промени информацията за проекта</h2>
+    </div>
+
+    <form method="POST">
+
+        <div class="form-group">
+            <label for="name">Име на проекта</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ project.name }}"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+            >{{ project.description or '' }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                Запази промените
+            </button>
+
+            <a href="{{ url_for('main.projects') }}" class="btn-secondary">
+                Отказ
+            </a>
+        </div>
+
+    </form>
+</section>
+
+{% endblock %}

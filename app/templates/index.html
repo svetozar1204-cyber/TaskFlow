@@ -1,0 +1,95 @@
+
+{% extends "base.html" %}
+
+{% block title %}Табло | TaskFlow{% endblock %}
+{% block page_title %}Добре дошъл в TaskFlow!{% endblock %}
+
+{% block content %}
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <span>Всички проекти</span>
+        <h2>{{ total_projects }}</h2>
+        <p>Създадени проекта</p>
+    </div>
+
+    <div class="stat-card">
+        <span>Всички задачи</span>
+        <h2>{{ total_tasks }}</h2>
+        <p>Общ брой задачи</p>
+    </div>
+
+    <div class="stat-card">
+        <span>В процес</span>
+        <h2>{{ in_progress }}</h2>
+        <p>Активни задачи</p>
+    </div>
+
+    <div class="stat-card">
+        <span>Завършени</span>
+        <h2>{{ completed_tasks }}</h2>
+        <p>Успешно приключени</p>
+    </div>
+
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Последни задачи</h2>
+        <a href="{{ url_for('main.tasks') }}" class="btn-secondary">
+            Всички задачи
+        </a>
+    </div>
+
+    {% if tasks %}
+        <div class="task-list">
+            {% for task in tasks %}
+                <div class="task-item">
+                    <div class="task-info">
+                        <h3>{{ task.title }}</h3>
+                        <p>Проект: {{ task.project.name }}</p>
+                    </div>
+
+                    <span class="status-badge">
+                        {{ task.status }}
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Все още нямаш задачи. Започни с добавянето на първата!
+        </p>
+    {% endif %}
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Моите проекти</h2>
+        <a href="{{ url_for('main.projects') }}" class="btn-secondary">
+            Всички проекти
+        </a>
+    </div>
+
+    {% if projects %}
+        <div class="project-list">
+            {% for project in projects %}
+                <div class="project-item">
+                    <div class="project-info">
+                        <h3>{{ project.name }}</h3>
+                        <p>{{ project.description or 'Няма описание' }}</p>
+                        <small>{{ project.tasks|length }} задачи</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Все още нямаш проекти.
+            <a href="{{ url_for('main.projects') }}">Създай първия си проект.</a>
+        </p>
+    {% endif %}
+</section>
+
+{% endblock %}

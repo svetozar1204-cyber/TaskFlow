@@ -1,0 +1,132 @@
+
+{% extends "base.html" %}
+
+{% block title %}Задачи | TaskFlow{% endblock %}
+{% block page_title %}Моите задачи{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Добави нова задача</h2>
+    </div>
+
+    {% if projects %}
+    <form method="POST" action="{{ url_for('main.tasks') }}">
+
+        <div class="form-group">
+            <label for="title">Заглавие</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Например: Създаване на начална страница"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea
+                id="description"
+                name="description"
+                rows="3"
+                placeholder="Описание на задачата..."
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="project_id">Проект</label>
+            <select id="project_id" name="project_id" required>
+                <option value="">Избери проект</option>
+                {% for project in projects %}
+                    <option value="{{ project.id }}">
+                        {{ project.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Статус</label>
+            <select id="status" name="status">
+                <option value="Предстои">Предстои</option>
+                <option value="В процес">В процес</option>
+                <option value="Готова">Готова</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-primary">
+            + Добави задача
+        </button>
+
+    </form>
+    {% else %}
+        <p class="empty-state">
+            Първо трябва да създадеш проект, за да добавиш задача.
+        </p>
+        <a href="{{ url_for('main.projects') }}" class="btn-primary">
+            Създай проект
+        </a>
+    {% endif %}
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Всички задачи</h2>
+        <span>{{ tasks|length }} задачи</span>
+    </div>
+
+    {% if tasks %}
+        <div class="task-list">
+            {% for task in tasks %}
+                <div class="task-item">
+
+                    <div class="task-info">
+                        <h3>{{ task.title }}</h3>
+
+                        <p>
+                            {{ task.project.name }}
+                        </p>
+
+                        <small>
+                            {{ task.description or 'Няма описание' }}
+                        </small>
+                    </div>
+
+                    <div class="task-actions">
+
+                        <span class="status-badge">
+                            {{ task.status }}
+                        </span>
+
+                        <a
+                            href="{{ url_for('main.edit_task', task_id=task.id) }}"
+                            class="btn-secondary"
+                        >
+                            Редактирай
+                        </a>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('main.delete_task', task_id=task.id) }}"
+                            onsubmit="return confirm('Сигурен ли си, че искаш да изтриеш задачата?')"
+                        >
+                            <button type="submit" class="btn-danger">
+                                Изтрий
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Все още няма създадени задачи.
+        </p>
+    {% endif %}
+</section>
+
+{% endblock %}

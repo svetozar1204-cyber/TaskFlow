@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+
+{% block title %}Редактиране на задача | TaskFlow{% endblock %}
+{% block page_title %}Редактиране на задача{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Промени информацията за задачата</h2>
+    </div>
+
+    <form method="POST">
+
+        <div class="form-group">
+            <label for="title">Заглавие</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                value="{{ task.title }}"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+            >{{ task.description or '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="project_id">Проект</label>
+            <select id="project_id" name="project_id" required>
+                {% for project in projects %}
+                    <option
+                        value="{{ project.id }}"
+                        {% if task.project_id == project.id %}selected{% endif %}
+                    >
+                        {{ project.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Статус</label>
+            <select id="status" name="status">
+                <option value="Предстои"
+                    {% if task.status == 'Предстои' %}selected{% endif %}>
+                    Предстои
+                </option>
+
+                <option value="В процес"
+                    {% if task.status == 'В процес' %}selected{% endif %}>
+                    В процес
+                </option>
+
+                <option value="Готова"
+                    {% if task.status == 'Готова' %}selected{% endif %}>
+                    Готова
+                </option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                Запази промените
+            </button>
+
+            <a href="{{ url_for('main.tasks') }}" class="btn-secondary">
+                Отказ
+            </a>
+        </div>
+
+    </form>
+</section>
+
+{% endblock %}

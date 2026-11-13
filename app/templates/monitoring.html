@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+{% block title %}Monitoring | TaskFlow{% endblock %}
+{% block page_title %}Системен мониторинг{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+    <h2>Състояние на системата</h2>
+    <p>Реална проверка на компонентите на TaskFlow.</p>
+
+    <div class="monitoring-grid">
+
+        {% for name, is_healthy in statuses.items() %}
+
+        <div class="stat-card monitoring-card">
+
+            <h3>{{ name }}</h3>
+
+            {% if is_healthy %}
+                <span class="status-badge status-ok">
+                    ● Работи
+                </span>
+                <p>Компонентът отговаря успешно.</p>
+            {% else %}
+                <span class="status-badge status-error">
+                    ● Не работи
+                </span>
+                <p>Компонентът не отговори на проверката.</p>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <p class="monitoring-note">
+        Статусите се проверяват при всяко зареждане на страницата.
+    </p>
+
+    <button onclick="window.location.reload()">
+        Обнови проверките
+    </button>
+
+</section>
+
+{% endblock %}

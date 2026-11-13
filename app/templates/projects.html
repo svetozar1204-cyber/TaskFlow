@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+
+{% block title %}Проекти | TaskFlow{% endblock %}
+{% block page_title %}Моите проекти{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Добави нов проект</h2>
+    </div>
+
+    <form method="POST" action="{{ url_for('main.projects') }}">
+        <div class="form-group">
+            <label for="name">Име на проекта</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Например: Уебсайт"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea
+                id="description"
+                name="description"
+                placeholder="Опиши проекта..."
+                rows="3"
+            ></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">
+            + Добави проект
+        </button>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h2>Всички проекти</h2>
+        <span>{{ projects|length }} проекта</span>
+    </div>
+
+    {% if projects %}
+        <div class="project-list">
+            {% for project in projects %}
+                <div class="project-item">
+                    <div class="project-info">
+                        <h3>{{ project.name }}</h3>
+                        <p>{{ project.description or 'Няма описание' }}</p>
+                        <small>
+                            Задачи: {{ project.tasks|length }}
+                        </small>
+                    </div>
+
+                    <div class="project-actions">
+                        <a
+                            href="{{ url_for('main.edit_project', project_id=project.id) }}"
+                            class="btn-secondary"
+                        >
+                            Редактирай
+                        </a>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('main.delete_project', project_id=project.id) }}"
+                            onsubmit="return confirm('Сигурен ли си, че искаш да изтриеш проекта?')"
+                        >
+                            <button type="submit" class="btn-danger">
+                                Изтрий
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">
+            Все още няма създадени проекти.
+        </p>
+    {% endif %}
+</section>
+
+{% endblock %}

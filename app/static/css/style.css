@@ -1,0 +1,349 @@
+/* Основни настройки */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #101321;
+    color: #eef0fa;
+    font-size: 15px;
+}
+
+a {
+    color: #a58cff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #c4b3ff;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Основно оформление */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    background: #191d2b;
+    border-right: 1px solid #252b3c;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    color: #a58cff;
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 45px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar nav a {
+    color: #c5cbe0;
+    padding: 13px 15px;
+    border-radius: 8px;
+}
+
+.sidebar nav a:hover {
+    background: #292d42;
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    color: #818ba7;
+    font-size: 13px;
+    padding-top: 30px;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 28px;
+    margin: 8px 0;
+}
+
+.eyebrow {
+    color: #a58cff;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #a58cff;
+    color: #171326;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+/* Панели */
+.panel {
+    background: #191d2b;
+    border: 1px solid #252b3c;
+    border-radius: 13px;
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.panel p {
+    color: #aeb7d1;
+}
+
+/* Форми */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    color: #eef0fa;
+    background: #101321;
+    border: 1px solid #343b52;
+    border-radius: 8px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #a58cff;
+    border-color: #a58cff;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #8e70e8;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #a58cff;
+}
+
+/* Проекти и задачи */
+.project-list,
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project-item,
+.task-item {
+    background: #202538;
+    border: 1px solid #30374d;
+    border-radius: 9px;
+    padding: 17px;
+}
+
+.project-item h3,
+.task-item h3 {
+    margin-top: 0;
+}
+
+.project-item p,
+.task-item p {
+    color: #aeb7d1;
+}
+
+.alert {
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+}
+
+.alert.success {
+    background: #173d32;
+    color: #8de0b8;
+}
+
+.alert.error {
+    background: #48252d;
+    color: #ffaaaa;
+}
+
+/* Малки екрани */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 14px;
+    }
+
+    .topbar h1 {
+        font-size: 22px;
+    }
+}
+/* Dashboard statistics */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    background: #191d2b;
+    border: 1px solid #252b3c;
+    border-radius: 13px;
+    padding: 22px;
+}
+
+.stat-card span {
+    color: #aeb7d1;
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    color: #a58cff;
+    font-size: 32px;
+    margin: 14px 0 8px;
+}
+
+.stat-card p {
+    color: #818ba7;
+    font-size: 12px;
+}
+
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Monitoring page */
+
+.monitoring-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.monitoring-card {
+    padding: 22px;
+    border-radius: 13px;
+}
+
+.monitoring-card h3 {
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-ok {
+    color: #55e6a5;
+    background: #123b2e;
+}
+
+.status-error {
+    color: #ff7777;
+    background: #451f29;
+}
+
+.monitoring-card p {
+    margin-top: 14px;
+    color: #aeb7d1;
+    font-size: 13px;
+}
+
+.monitoring-note {
+    margin: 24px 0;
+    color: #aeb7d1;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+    .monitoring-grid {
+        grid-template-columns: 1fr;
+    }
+}

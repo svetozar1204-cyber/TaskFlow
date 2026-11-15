@@ -1,0 +1,29 @@
+cat > docs/TaskFlow_UML.drawio <<'EOF'
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="taskflow-uml" name="TaskFlow UML">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="project" value="&lt;b&gt;Project&lt;/b&gt;&lt;hr&gt;- id: Integer&lt;br&gt;- name: String&lt;br&gt;- description: Text&lt;br&gt;- created_at: DateTime" style="swimlane;html=1;startSize=35;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;horizontal=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="260" height="190" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="task" value="&lt;b&gt;Task&lt;/b&gt;&lt;hr&gt;- id: Integer&lt;br&gt;- title: String&lt;br&gt;- description: Text&lt;br&gt;- status: String&lt;br&gt;- due_date: Date&lt;br&gt;- created_at: DateTime&lt;br&gt;- project_id: Integer" style="swimlane;html=1;startSize=35;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;horizontal=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="650" y="150" width="280" height="250" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="relation" value="1        0..*&lt;br&gt;has many / belongs to" style="endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="project" target="task">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="275"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+EOF
